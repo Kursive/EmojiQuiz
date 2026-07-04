@@ -1,9 +1,7 @@
 <div align="center">
 
 # 🎬 Emoji Quiz
-
 ### Угадай фильм по эмодзи
-
 Десктопная викторина на **C# + WinForms + SQLite + Entity Framework Core**
 
 ![.NET](https://img.shields.io/badge/.NET-10-purple?style=for-the-badge&logo=dotnet)
@@ -17,10 +15,6 @@
 Задача игрока — выбрать правильный вариант ответа.
 
 </div>
-
-
-
-
 
 # ✨ Возможности
 
@@ -66,25 +60,15 @@ dotnet restore
 
 ## 3. Подготовить данные
 
-Положите рядом с проектом файл
-
-```
-movies_ru_emoji.tsv
-```
-
-При первом запуске автоматически будет создан файл
-
-```
-quiz.db
-```
-
-и импортированы все вопросы.
+Положите файл `movies_ru_emoji.tsv` в папку `EmojiQuiz` рядом с `.csproj`.  
+При первом запуске автоматически будет создан файл `quiz.db` и импортированы все вопросы.
 
 ---
 
 ## 4. Запустить приложение
 
 ```bash
+cd EmojiQuiz
 dotnet run
 ```
 
@@ -102,7 +86,6 @@ dotnet run
 # 👨‍💻 Режим администратора
 
 Администратор может:
-
 - добавить новые вопросы;
 - указать эмодзи;
 - написать правильный ответ;
@@ -125,7 +108,6 @@ EmojiQuiz
 ├── QuizContext.cs
 ├── Question.cs
 │
-├── quiz.db
 ├── movies_ru_emoji.tsv
 │
 ├── prepare_data.py
@@ -146,36 +128,26 @@ pip install pandas
 ```
 
 Скачайте:
-
-- **movies_emojis.csv** (Kaggle)
+- **Movies_to_Emojis.csv** (Kaggle)
 - **title.basics.tsv**
 - **title.akas.tsv**
 
-После этого выполните
+Положите все три файла рядом со скриптом `prepare_data.py` и выполните:
 
 ```bash
 python prepare_data.py
 ```
 
-На выходе получится
-
-```
-movies_ru_emoji.tsv
-```
+На выходе получится файл `movies_ru_emoji.tsv` — скопируйте его в папку `EmojiQuiz`.
 
 ---
 
 # 📚 Источники данных
 
-- IMDb
-- Kaggle Movies to Emojis Dataset
+- [IMDb Datasets](https://datasets.imdbws.com/)
+- [Kaggle Movies to Emojis Dataset](https://www.kaggle.com/datasets/tarundalal/movies-to-emojis-dataset)
 
 ---
 
-
-
 <div align="center">
-
-
-
 </div>
