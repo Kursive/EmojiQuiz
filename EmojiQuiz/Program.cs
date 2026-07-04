@@ -6,10 +6,9 @@ static class Program
     static void Main()
     {
         ApplicationConfiguration.Initialize();
-
-        Db.EnsureCreated();                      
-        Db.SeedFromFile("movies_ru_emoji.tsv");  
-
-        Application.Run(new MainForm());       
+        Db.EnsureCreated();
+        Db.SeedFromFile();
+        Application.Run(new MainForm());
     }
 }
+

@@ -1,15 +1,11 @@
-﻿# Default ignored files
-/shelf/
-/workspace.xml
-# Rider ignored files
-/.idea.EmojiQuiz.iml
-/modules.xml
-/contentModel.xml
-/projectSettingsUpdater.xml
-# Ignored default folder with query files
-/queries/
-# Datasource local storage ignored files
-/dataSources/
-/dataSources.local.xml
-# Editor-based HTTP Client requests
-/httpRequests/
+﻿bin/
+obj/
+quiz.db
+.idea/
+.vs/
+*.user
+*.suo
+title.basics.tsv
+title.akas.tsv
+movies_emojis.csv
+Movies_to_Emojis.csv

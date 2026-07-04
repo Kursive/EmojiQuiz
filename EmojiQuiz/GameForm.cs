@@ -2,102 +2,87 @@ namespace EmojiQuiz;
 
 public class GameForm : Form
 {
-    private Label labelEmoji;
-    private Label labelScore;
-    private Label labelResult;
-    private Button button1, button2, button3, button4;
+    private readonly Label labelEmoji;
+    private readonly Label labelScore;
+    private readonly Label labelResult;
+    private readonly Button[] answerButtons = new Button[4];
 
-    static readonly Random rng = new();
-    Question? current;
-    int score = 0;
+    private static readonly Random Rng = new();
+    private Question? current;
+    private int score = 0;
+    private System.Windows.Forms.Timer? answerTimer;
+
+    private static readonly Color BgNormal  = Color.FromArgb(52, 52, 72);
+    private static readonly Color BgCorrect = Color.FromArgb(52, 168, 83);
+    private static readonly Color BgWrong   = Color.FromArgb(192, 57, 57);
 
     public GameForm()
     {
-        InitializeComponent();
-        NextQuestion();
-    }
-
-    private void InitializeComponent()
-    {
-       
-        Text = "Игра";
-        Size = new Size(500, 480);
-        StartPosition = FormStartPosition.CenterScreen;
+        Text            = "Игра";
+        Size            = new Size(520, 510);
+        StartPosition   = FormStartPosition.CenterScreen;
         FormBorderStyle = FormBorderStyle.FixedSingle;
-        MaximizeBox = false;
-        BackColor = Color.FromArgb(30, 30, 40);
+        MaximizeBox     = false;
+        BackColor       = Color.FromArgb(28, 28, 40);
 
-        
         labelEmoji = new Label
         {
-            Font = new Font("Segoe UI Emoji", 52),
+            Font      = new Font("Segoe UI Emoji", 56),
             ForeColor = Color.White,
-            AutoSize = false,
+            AutoSize  = false,
             TextAlign = ContentAlignment.MiddleCenter,
-            Size = new Size(480, 110),
-            Location = new Point(10, 15)
+            Bounds    = new Rectangle(10, 10, 480, 120)
         };
 
-        
         labelScore = new Label
         {
-            Text = "Счёт: 0",
-            Font = new Font("Segoe UI", 12, FontStyle.Bold),
-            ForeColor = Color.FromArgb(180, 200, 255),
-            AutoSize = false,
+            Text      = "Счёт: 0",
+            Font      = new Font("Segoe UI", 11, FontStyle.Bold),
+            ForeColor = Color.FromArgb(160, 190, 255),
+            AutoSize  = false,
             TextAlign = ContentAlignment.MiddleRight,
-            Size = new Size(460, 30),
-            Location = new Point(10, 130)
+            Bounds    = new Rectangle(10, 138, 480, 28)
         };
 
-        
         labelResult = new Label
         {
-            Text = "",
-            Font = new Font("Segoe UI Emoji", 11),
-            ForeColor = Color.FromArgb(255, 220, 100),
-            AutoSize = false,
+            Text      = "",
+            Font      = new Font("Segoe UI Emoji", 11),
+            ForeColor = Color.FromArgb(255, 215, 80),
+            AutoSize  = false,
             TextAlign = ContentAlignment.MiddleCenter,
-            Size = new Size(460, 35),
-            Location = new Point(10, 165)
+            Bounds    = new Rectangle(10, 170, 480, 32)
         };
 
-       
-        var positions = new Point[]
+        Point[] positions =
         {
-            new(20, 210), new(260, 210),
-            new(20, 310), new(260, 310)
+            new(20, 215), new(270, 215),
+            new(20, 330), new(270, 330)
         };
-        var btns = new Button[4];
+
         for (int i = 0; i < 4; i++)
         {
-            btns[i] = new Button
+            int idx = i;
+            answerButtons[i] = new Button
             {
-                Font = new Font("Segoe UI", 11),
-                Size = new Size(200, 80),
-                Location = positions[i],
-                BackColor = Color.FromArgb(55, 55, 75),
+                Font      = new Font("Segoe UI", 11),
+                Size      = new Size(210, 100),
+                Location  = positions[i],
+                BackColor = BgNormal,
                 ForeColor = Color.White,
                 FlatStyle = FlatStyle.Flat,
-                Cursor = Cursors.Hand,
+                Cursor    = Cursors.Hand,
                 TextAlign = ContentAlignment.MiddleCenter
             };
-            btns[i].FlatAppearance.BorderColor = Color.FromArgb(100, 100, 130);
-            btns[i].FlatAppearance.BorderSize = 1;
+            answerButtons[i].FlatAppearance.BorderColor = Color.FromArgb(90, 90, 115);
+            answerButtons[i].Click += (_, _) => CheckAnswer(answerButtons[idx].Text);
         }
-        button1 = btns[0]; button2 = btns[1];
-        button3 = btns[2]; button4 = btns[3];
 
-        button1.Click += (s, e) => CheckAnswer(button1.Text);
-        button2.Click += (s, e) => CheckAnswer(button2.Text);
-        button3.Click += (s, e) => CheckAnswer(button3.Text);
-        button4.Click += (s, e) => CheckAnswer(button4.Text);
+        var controls = new List<Control> { labelEmoji, labelScore, labelResult };
+        controls.AddRange(answerButtons);
+        Controls.AddRange(controls.ToArray());
 
-        Controls.AddRange(new Control[]
-        {
-            labelEmoji, labelScore, labelResult,
-            button1, button2, button3, button4
-        });
+        NextQuestion();
     }
 
     void NextQuestion()
@@ -105,30 +90,31 @@ public class GameForm : Form
         current = Db.GetRandom();
         if (current == null)
         {
-            labelEmoji.Text = "😔";
+            labelEmoji.Text  = "😔";
             labelResult.Text = "База пустая";
+            foreach (var b in answerButtons) b.Visible = false;
             return;
         }
 
-        labelEmoji.Text = current.Emoji;
+        labelEmoji.Text  = current.Emoji;
         labelResult.Text = "";
 
         var options = Db.GetWrongAnswers(current.Answer, 3);
         options.Add(current.Answer);
         Shuffle(options);
 
-        var buttons = new[] { button1, button2, button3, button4 };
-        for (int i = 0; i < buttons.Length; i++)
+        for (int i = 0; i < answerButtons.Length; i++)
         {
             if (i < options.Count)
             {
-                buttons[i].Text = options[i];
-                buttons[i].Visible = true;
-                buttons[i].BackColor = Color.FromArgb(55, 55, 75);
+                answerButtons[i].Text      = options[i];
+                answerButtons[i].Visible   = true;
+                answerButtons[i].Enabled   = true;
+                answerButtons[i].BackColor = BgNormal;
             }
             else
             {
-                buttons[i].Visible = false;
+                answerButtons[i].Visible = false;
             }
         }
     }
@@ -137,41 +123,40 @@ public class GameForm : Form
     {
         if (current == null) return;
 
-        var buttons = new[] { button1, button2, button3, button4 };
+        foreach (var b in answerButtons) b.Enabled = false;
 
-        if (chosen == current.Answer)
+        bool correct = chosen == current.Answer;
+
+        foreach (var b in answerButtons)
         {
-            score++;
-            labelResult.Text = "✅ Верно!";
-            
-            foreach (var b in buttons)
-                if (b.Text == chosen) b.BackColor = Color.FromArgb(60, 160, 80);
-        }
-        else
-        {
-            labelResult.Text = "❌ Неверно — это: " + current.Answer;
-           
-            foreach (var b in buttons)
-            {
-                if (b.Text == chosen) b.BackColor = Color.FromArgb(180, 50, 50);
-                if (b.Text == current.Answer) b.BackColor = Color.FromArgb(60, 160, 80);
-            }
+            if (b.Text == current.Answer) b.BackColor = BgCorrect;
+            else if (b.Text == chosen)    b.BackColor = BgWrong;
         }
 
-        labelScore.Text = "Счёт: " + score;
+        labelResult.Text = correct ? "✅ Верно!" : $"❌ Неверно — правильный ответ: {current.Answer}";
+        labelScore.Text  = $"Счёт: {score += (correct ? 1 : 0)}";
 
-        
-        var timer = new System.Windows.Forms.Timer { Interval = 1000 };
-        timer.Tick += (s, e) => { timer.Stop(); NextQuestion(); };
-        timer.Start();
+        if (answerTimer == null)
+        {
+            answerTimer = new System.Windows.Forms.Timer { Interval = 1200 };
+            answerTimer.Tick += (_, _) => { answerTimer.Stop(); NextQuestion(); };
+        }
+        answerTimer.Stop();
+        answerTimer.Start();
     }
 
     void Shuffle(List<string> list)
     {
         for (int i = list.Count - 1; i > 0; i--)
         {
-            int j = rng.Next(i + 1);
+            int j = Rng.Next(i + 1);
             (list[i], list[j]) = (list[j], list[i]);
         }
+    }
+
+    protected override void Dispose(bool disposing)
+    {
+        if (disposing) answerTimer?.Dispose();
+        base.Dispose(disposing);
     }
 }

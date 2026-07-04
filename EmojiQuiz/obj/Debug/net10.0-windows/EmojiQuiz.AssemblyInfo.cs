@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("EmojiQuiz")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+0c1cbcae07215458cf491ddb3fdd629740c4a570")]
 [assembly: System.Reflection.AssemblyProductAttribute("EmojiQuiz")]
 [assembly: System.Reflection.AssemblyTitleAttribute("EmojiQuiz")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
