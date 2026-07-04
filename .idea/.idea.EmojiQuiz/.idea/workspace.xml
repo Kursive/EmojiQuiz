@@ -5,6 +5,16 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="9570cf25-e748-4b6a-8d84-f76f4f75e6cc" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/.idea/.idea.EmojiQuiz/.idea/projectSettingsUpdater.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/.idea.EmojiQuiz/.idea/workspace.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.vs/EmojiQuiz/v17/.futdcache.v2" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.vs/EmojiQuiz/v17/.suo" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.vs/EmojiQuiz/v17/DocumentLayout.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.vs/ProjectEvaluation/emojiquiz.metadata.v9.bin" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.vs/ProjectEvaluation/emojiquiz.projects.v9.bin" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.vs/ProjectEvaluation/emojiquiz.strings.v9.bin" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/EmojiQuiz/obj/Debug/net10.0-windows/EmojiQuiz.sourcelink.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/.idea.EmojiQuiz/.idea/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.EmojiQuiz/.idea/.gitignore" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/EmojiQuiz/AdminForm.cs" beforeDir="false" afterPath="$PROJECT_DIR$/EmojiQuiz/AdminForm.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/EmojiQuiz/Db.cs" beforeDir="false" afterPath="$PROJECT_DIR$/EmojiQuiz/Db.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/EmojiQuiz/GameForm.cs" beforeDir="false" afterPath="$PROJECT_DIR$/EmojiQuiz/GameForm.cs" afterDir="false" />
@@ -49,6 +59,9 @@
   }
 }</component>
   <component name="HighlightingSettingsPerFile">
+    <setting file="file://C:/Program Files (x86)/Nuget/Config/Microsoft.VisualStudio.FallbackLocation.config" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://C:/Program Files (x86)/Nuget/Config/Microsoft.VisualStudio.Offline.config" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$USER_HOME$/AppData/Roaming/NuGet/NuGet.Config" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/EmojiQuiz/AdminForm.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/EmojiQuiz/GameForm.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/EmojiQuiz/MainForm.cs" root0="FORCE_HIGHLIGHTING" />
@@ -116,7 +129,7 @@
       <workItem from="1783087045093" duration="12000" />
       <workItem from="1783181653294" duration="547000" />
       <workItem from="1783182335198" duration="482000" />
-      <workItem from="1783182931543" duration="342000" />
+      <workItem from="1783182931543" duration="639000" />
     </task>
     <servers />
   </component>
